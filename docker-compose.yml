@@ -11,6 +11,8 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d
     links:
       - php-fpm
+      - npm_manage
+      - npm_app
   php-fpm:
     build: "./docker/php-fpm/"
     volumes:
@@ -19,6 +21,7 @@ services:
       - ./docker/php-fpm/php-fpm.conf:/usr/local/etc/php-fpm.d/zzmyphp-fpm.conf
     links:
       - db
+      - db-test
   db:
     image: postgres:9.6.15
     environment:
@@ -30,3 +33,4 @@ services:
       - '5432:5432'
     volumes:
       - ./docker/postgres/db:/var/lib/postgresql/data
+
